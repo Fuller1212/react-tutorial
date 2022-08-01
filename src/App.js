@@ -1,32 +1,22 @@
 import React, { useState } from 'react';
-
+import DisplayEntries from './Components/DisplayEntries/DisplayEntries';
+import AddEntryForm from './Components/DisplayEntries/AddEntry/AddEntryForm';
 
 function App() {
 
 const [entries, setEntries] = useState([{weight: 175, date: '11-23-2021'}, {weight: 176, date: '11-24-2021'}])
 
+function addNewEntry(entry){
+
+  let tempEntries = [...entries, entry];
+
+  setEntries(tempEntries);
+}
+
   return (
     <div>
-      <table>
-        <thead> 
-          <tr>
-            <th> Entry Number</th>
-            <th> Weight</th>
-            <th> date</th>
-          </tr>
-        </thead>
-          <tbody> 
-            {entries.map((entry, index) => {
-              return (
-                <tr>
-                  <td>{index + 1}</td>
-                  <td>{entry.weight}</td>
-                  <td>{entry.date}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-      </table>
+      <DisplayEntries parentEntries = {entries}/>
+      <AddEntryForm addNewEntryProperty={addNewEntry}/>
     </div>
   );
 }
